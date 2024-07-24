@@ -1,0 +1,85 @@
+{
+  "applications": "*",
+  "changelogDate": "20240320121749",
+  "entityTableName": "agent",
+  "fields": [
+    {
+      "fieldName": "matricule",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateNaissance",
+      "fieldType": "Date"
+    },
+    {
+      "fieldName": "lieuNaissance",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nationalite",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateDece",
+      "fieldType": "Date"
+    },
+    {
+      "fieldName": "causeDece",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Agent",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "disponibilite",
+      "otherEntityRelationshipName": "agent",
+      "relationshipName": "disponibilite",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "miseadisposition",
+      "otherEntityRelationshipName": "agent",
+      "relationshipName": "miseadisposition",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "demandeDexplication",
+      "otherEntityRelationshipName": "agent",
+      "relationshipName": "demandeDexplication",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "poste",
+      "otherEntityRelationshipName": "agent",
+      "relationshipName": "poste",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

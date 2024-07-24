@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="degre">
+      <h2 data-cy="degreDetailsHeading"><span>Degre</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt style="text-align: justify"><span>#</span></dt>
+        <dd>
+          <span>{{ degre.id }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Code</span></dt>
+        <dd>
+          <span>{{ degre.code }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Libelle</span></dt>
+        <dd>
+          <span>{{ degre.libelle }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/degre', degre.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

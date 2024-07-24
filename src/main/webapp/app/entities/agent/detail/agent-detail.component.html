@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="agent">
+      <h2 data-cy="agentDetailsHeading"><span>Agent</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt style="text-align: justify"><span>#</span></dt>
+        <dd>
+          <span>{{ agent.id }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Matricule</span></dt>
+        <dd>
+          <span>{{ agent.matricule }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Nom</span></dt>
+        <dd>
+          <span>{{ agent.nom }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Prenom</span></dt>
+        <dd>
+          <span>{{ agent.prenom }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Date Naissance</span></dt>
+        <dd>
+          <span>{{ agent.dateNaissance | formatMediumDate }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Lieu Naissance</span></dt>
+        <dd>
+          <span>{{ agent.lieuNaissance }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Nationalite</span></dt>
+        <dd>
+          <span>{{ agent.nationalite }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Telephone</span></dt>
+        <dd>
+          <span>{{ agent.telephone }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Adresse</span></dt>
+        <dd>
+          <span>{{ agent.adresse }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Date Dece</span></dt>
+        <dd>
+          <span>{{ agent.dateDece | formatMediumDate }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Cause Dece</span></dt>
+        <dd>
+          <span>{{ agent.causeDece }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Poste</span></dt>
+        <dd>
+          <div *ngIf="agent.poste">
+            <a [routerLink]="['/poste', agent.poste.id, 'view']">{{ agent.poste.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/agent', agent.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

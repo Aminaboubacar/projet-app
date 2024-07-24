@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20240320121949",
+  "entityTableName": "sanction",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Sanction",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "sanctionner",
+      "otherEntityRelationshipName": "sanction",
+      "relationshipName": "sanctionner",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "degre",
+      "otherEntityRelationshipName": "sanction",
+      "relationshipName": "degre",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Disponibilite.
+    -->
+    <changeSet id="20240320122449-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="motif_disponibilite_id"
+                                 baseTableName="disponibilite"
+                                 constraintName="fk_disponibilite__motif_disponibilite_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="motif_disponibilite"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="agent_id"
+                                 baseTableName="disponibilite"
+                                 constraintName="fk_disponibilite__agent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="agent"
+                                 />
+    </changeSet>
+</databaseChangeLog>

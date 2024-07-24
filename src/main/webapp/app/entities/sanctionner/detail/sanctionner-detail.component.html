@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sanctionner">
+      <h2 data-cy="sanctionnerDetailsHeading"><span>Sanctionner</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt style="text-align: justify"><span>#</span></dt>
+        <dd>
+          <span>{{ sanctionner.id }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Date</span></dt>
+        <dd>
+          <span>{{ sanctionner.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Sanction</span></dt>
+        <dd>
+          <div *ngIf="sanctionner.sanction">
+            <a [routerLink]="['/sanction', sanctionner.sanction.id, 'view']">{{ sanctionner.sanction.id }}</a>
+          </div>
+        </dd>
+        <dt style="text-align: justify"><span>Demande Dexplication</span></dt>
+        <dd>
+          <div *ngIf="sanctionner.demandeDexplication">
+            <a [routerLink]="['/demande-dexplication', sanctionner.demandeDexplication.id, 'view']">{{
+              sanctionner.demandeDexplication.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sanctionner', sanctionner.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

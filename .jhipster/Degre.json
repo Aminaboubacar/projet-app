@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20240320121849",
+  "entityTableName": "degre",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Degre",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "sanction",
+      "otherEntityRelationshipName": "degre",
+      "relationshipName": "sanction",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

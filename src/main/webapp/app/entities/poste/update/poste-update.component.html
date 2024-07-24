@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-poste-heading"
+        data-cy="PosteCreateUpdateHeading"
+        style="font-family: 'Times New Roman', Times, serif; display: flex; font-size: 40px"
+      >
+        Créer ou éditer un Poste
+      </h2>
+
+      <div style="background-color: #f9f9f9; margin-bottom: 10px">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id" style="font-family: Arial, Helvetica, sans-serif">#</label>
+          <input
+            type="number"
+            class="form-control"
+            name="id"
+            id="field_id"
+            data-cy="id"
+            formControlName="id"
+            [readonly]="true"
+            style="border: 3px solid #ccc"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" style="font-family: Arial, Helvetica, sans-serif">Code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            formControlName="code"
+            style="border: 3px solid #ccc"
+          />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required">Veuillez remplir le champ</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_libelle" style="font-family: Arial, Helvetica, sans-serif">Libelle</label>
+          <input
+            type="text"
+            class="form-control"
+            name="libelle"
+            id="field_libelle"
+            data-cy="libelle"
+            formControlName="libelle"
+            style="border: 3px solid #ccc"
+          />
+          <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('libelle')?.errors?.required">Veuillez remplir le champ</small>
+            <small class="form-text text-danger" *ngIf="editForm.get('libelle')?.errors?.maxlength"
+              >Translation missing for entity.validation.maxlength</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            style="font-family: Arial, Helvetica, sans-serif; background-color: #000103; color: #fff"
+            >Annuler</span
+          >
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            style="font-family: Arial, Helvetica, sans-serif; background-color: #000103; color: #fff"
+            >Enregistre</span
+          >
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

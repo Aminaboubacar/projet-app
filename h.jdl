@@ -1,0 +1,76 @@
+
+
+entity Agent {
+ matricule String required
+ nom String required
+ prenom String required
+ dateNaissance Date
+ lieuNaissance String
+ nationalite String
+ telephone String 
+ adresse String
+ dateDece Date
+ causeDece String
+}
+entity Degre {
+ code String required
+ libelle String required
+}
+entity Sanction {
+ code String required
+ libelle String required
+}
+entity DemandeDexplication {
+ code String required
+ date Instant
+ objet String required
+ appDg	String
+ datappDg Instant
+}
+entity Poste {
+ code String required
+ libelle String maxlength(30) required
+}
+
+entity Miseadisposition {
+ code String required
+ organisme String required
+ dateDebut Date
+ dateFin Date
+ sensMouvement String
+ dateRetour Date
+}
+
+entity MotifDisponibilite {
+  code String required 
+  libelle String required
+}
+entity Disponibilite {
+ code String required
+ dateDebut Date
+ dateFin Date
+ dateRetour Date
+}
+entity Sanctionner {
+  date Date
+}
+relationship OneToMany {
+Poste to Agent,
+MotifDisponibilite to Disponibilite,
+Agent to Disponibilite,
+Agent to Miseadisposition,
+Degre to Sanction,
+Agent to DemandeDexplication,
+Sanction to Sanctionner,
+DemandeDexplication to Sanctionner
+}
+
+
+// Set pagination options
+paginate * with pagination
+
+
+// Set service options to all except few
+service all with serviceImpl
+
+filter * 

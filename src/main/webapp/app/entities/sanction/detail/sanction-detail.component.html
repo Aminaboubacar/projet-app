@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sanction">
+      <h2 data-cy="sanctionDetailsHeading"><span>Sanction</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt style="text-align: justify"><span>#</span></dt>
+        <dd>
+          <span>{{ sanction.id }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Code</span></dt>
+        <dd>
+          <span>{{ sanction.code }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Libelle</span></dt>
+        <dd>
+          <span>{{ sanction.libelle }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Degre</span></dt>
+        <dd>
+          <div *ngIf="sanction.degre">
+            <a [routerLink]="['/degre', sanction.degre.id, 'view']">{{ sanction.degre.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sanction', sanction.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

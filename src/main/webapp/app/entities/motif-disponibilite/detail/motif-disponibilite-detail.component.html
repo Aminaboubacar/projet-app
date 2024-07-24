@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="motifDisponibilite">
+      <h2 data-cy="motifDisponibiliteDetailsHeading"><span>Motif Disponibilite</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt style="text-align: justify"><span>Numéro d'ordre</span></dt>
+        <dd>
+          <span>{{ motifDisponibilite.id }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Code</span></dt>
+        <dd>
+          <span>{{ motifDisponibilite.code }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Libelle</span></dt>
+        <dd>
+          <span>{{ motifDisponibilite.libelle }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/motif-disponibilite', motifDisponibilite.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

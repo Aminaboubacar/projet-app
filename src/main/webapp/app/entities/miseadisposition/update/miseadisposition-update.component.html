@@ -1,0 +1,162 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-miseadisposition-heading"
+        data-cy="MiseadispositionCreateUpdateHeading"
+        style="font-family: 'Times New Roman', Times, serif; display: flex; font-size: 40px"
+      >
+        Créer ou éditer une Miseadisposition
+      </h2>
+
+      <div style="background-color: #f9f9f9; margin-bottom: 10px">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id" style="font-family: Arial, Helvetica, sans-serif">#</label>
+          <input
+            type="number"
+            class="form-control"
+            name="id"
+            id="field_id"
+            data-cy="id"
+            formControlName="id"
+            [readonly]="true"
+            style="border: 3px solid #ccc"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" style="font-family: Arial, Helvetica, sans-serif">Code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            formControlName="code"
+            style="border: 3px solid #ccc"
+          />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required">Veuillez remplir le champ</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_organisme" style="font-family: Arial, Helvetica, sans-serif">Organisme</label>
+          <input
+            type="text"
+            class="form-control"
+            name="organisme"
+            id="field_organisme"
+            data-cy="organisme"
+            formControlName="organisme"
+            style="border: 3px solid #ccc"
+          />
+          <div *ngIf="editForm.get('organisme')!.invalid && (editForm.get('organisme')!.dirty || editForm.get('organisme')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('organisme')?.errors?.required">Veuillez remplir le champ</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDebut" style="font-family: Arial, Helvetica, sans-serif">Date Debut</label>
+          <div class="d-flex">
+            <input
+              id="field_dateDebut"
+              data-cy="dateDebut"
+              type="datetime-local"
+              class="form-control"
+              name="dateDebut"
+              formControlName="dateDebut"
+              placeholder="YYYY-MM-DD"
+              style="border: 3px solid #ccc"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateFin" style="font-family: Arial, Helvetica, sans-serif">Date Fin</label>
+          <div class="d-flex">
+            <input
+              id="field_dateFin"
+              data-cy="dateFin"
+              type="datetime-local"
+              class="form-control"
+              name="dateFin"
+              formControlName="dateFin"
+              placeholder="YYYY-MM-DD"
+              style="border: 3px solid #ccc"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sensMouvement" style="font-family: Arial, Helvetica, sans-serif">Sens Mouvement</label>
+          <input
+            type="text"
+            class="form-control"
+            name="sensMouvement"
+            id="field_sensMouvement"
+            data-cy="sensMouvement"
+            formControlName="sensMouvement"
+            style="border: 3px solid #ccc"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateRetour" style="font-family: Arial, Helvetica, sans-serif">Date Retour</label>
+          <div class="d-flex">
+            <input
+              id="field_dateRetour"
+              data-cy="dateRetour"
+              type="datetime-local"
+              class="form-control"
+              name="dateRetour"
+              formControlName="dateRetour"
+              placeholder="YYYY-MM-DD"
+              style="border: 3px solid #ccc"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_agent" style="font-family: Arial, Helvetica, sans-serif">Agent</label>
+          <select
+            class="form-control"
+            id="field_agent"
+            data-cy="agent"
+            name="agent"
+            formControlName="agent"
+            [compareWith]="compareAgent"
+            style="border: 3px solid #ccc"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="agentOption" *ngFor="let agentOption of agentsSharedCollection">{{ agentOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            style="font-family: Arial, Helvetica, sans-serif; background-color: #000103; color: #fff"
+            >Annuler</span
+          >
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            style="font-family: Arial, Helvetica, sans-serif; background-color: #000103; color: #fff"
+            >Enregistrer</span
+          >
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

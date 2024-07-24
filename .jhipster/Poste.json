@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20240320122149",
+  "entityTableName": "poste",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "30"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Poste",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "agent",
+      "otherEntityRelationshipName": "poste",
+      "relationshipName": "agent",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

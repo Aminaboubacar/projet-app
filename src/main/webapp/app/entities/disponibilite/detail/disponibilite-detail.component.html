@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="disponibilite">
+      <h2 data-cy="disponibiliteDetailsHeading"><span>Disponibilite</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt style="text-align: justify"><span>#</span></dt>
+        <dd>
+          <span>{{ disponibilite.id }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Code</span></dt>
+        <dd>
+          <span>{{ disponibilite.code }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Date Debut</span></dt>
+        <dd>
+          <span>{{ disponibilite.dateDebut | formatMediumDatetime }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Date Fin</span></dt>
+        <dd>
+          <span>{{ disponibilite.dateFin | formatMediumDatetime }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Date Retour</span></dt>
+        <dd>
+          <span>{{ disponibilite.dateRetour | formatMediumDatetime }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Motif Disponibilite</span></dt>
+        <dd>
+          <div *ngIf="disponibilite.motifDisponibilite">
+            <a [routerLink]="['/motif-disponibilite', disponibilite.motifDisponibilite.id, 'view']">{{
+              disponibilite.motifDisponibilite.id
+            }}</a>
+          </div>
+        </dd>
+        <dt style="text-align: justify"><span>Agent</span></dt>
+        <dd>
+          <div *ngIf="disponibilite.agent">
+            <a [routerLink]="['/agent', disponibilite.agent.id, 'view']">{{ disponibilite.agent.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/disponibilite', disponibilite.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

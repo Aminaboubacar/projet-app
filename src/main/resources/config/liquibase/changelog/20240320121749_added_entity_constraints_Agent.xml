@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Agent.
+    -->
+    <changeSet id="20240320121749-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="poste_id"
+                                 baseTableName="agent"
+                                 constraintName="fk_agent__poste_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="poste"
+                                 />
+    </changeSet>
+</databaseChangeLog>

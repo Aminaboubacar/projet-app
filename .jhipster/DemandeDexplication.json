@@ -1,0 +1,50 @@
+{
+  "applications": "*",
+  "changelogDate": "20240320122049",
+  "entityTableName": "demande_dexplication",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "objet",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "appDg",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "datappDg",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "DemandeDexplication",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "sanctionner",
+      "otherEntityRelationshipName": "demandeDexplication",
+      "relationshipName": "sanctionner",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "agent",
+      "otherEntityRelationshipName": "demandeDexplication",
+      "relationshipName": "agent",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

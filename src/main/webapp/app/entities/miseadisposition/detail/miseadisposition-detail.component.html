@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="miseadisposition">
+      <h2 data-cy="miseadispositionDetailsHeading"><span>Miseadisposition</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt style="text-align: justify"><span>#</span></dt>
+        <dd>
+          <span>{{ miseadisposition.id }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Code</span></dt>
+        <dd>
+          <span>{{ miseadisposition.code }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Organisme</span></dt>
+        <dd>
+          <span>{{ miseadisposition.organisme }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Date Debut</span></dt>
+        <dd>
+          <span>{{ miseadisposition.dateDebut | formatMediumDatetime }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Date Fin</span></dt>
+        <dd>
+          <span>{{ miseadisposition.dateFin | formatMediumDatetime }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Sens Mouvement</span></dt>
+        <dd>
+          <span>{{ miseadisposition.sensMouvement }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Date Retour</span></dt>
+        <dd>
+          <span>{{ miseadisposition.dateRetour | formatMediumDatetime }}</span>
+        </dd>
+        <dt style="text-align: justify"><span>Agent</span></dt>
+        <dd>
+          <div *ngIf="miseadisposition.agent">
+            <a [routerLink]="['/agent', miseadisposition.agent.id, 'view']">{{ miseadisposition.agent.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/miseadisposition', miseadisposition.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

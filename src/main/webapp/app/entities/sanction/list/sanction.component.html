@@ -1,0 +1,185 @@
+<div>
+  <h2 id="page-heading" data-cy="SanctionHeading">
+    <span
+      style="
+        font-family: 'Times New Roman', Times, serif;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 5px;
+        font-size: 80px;
+        text-decoration: underline;
+        max-height: 0px;
+      "
+      >Sanctions</span
+    >
+    <img
+      src="content/images/logo-cnss.png"
+      alt="Description de l'image"
+      alt="CNSS"
+      style="max-width: 10%; height: auto; align-items: center; display: block; margin-top: auto; margin-bottom: auto"
+    />
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sanction"
+        [routerLink]="['/sanction/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Créer un nouveau Sanction</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="sanctions?.length === 0">
+    <span>Aucun Sanction trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="sanctions && sanctions.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">#</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="code" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="appApp.sanction.code">Code</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="libelle" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="appApp.sanction.libelle">Libelle</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="degre.id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="appApp.sanction.degre">Degre</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+
+          <th scope="col" jhiSortBy="degre.id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="appApp.sanction.code">Action</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sanction of sanctions; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/sanction', sanction.id, 'view']">{{ sanction.id }}</a>
+          </td>
+          <td>{{ sanction.code }}</td>
+          <td>{{ sanction.libelle }}</td>
+          <td>
+            <div *ngIf="sanction.degre">
+              <a [routerLink]="['/degre', sanction.degre.id, 'view']">{{ sanction.degre.libelle! }}</a>
+            </div>
+          </td>
+          <td>
+            <!-- <div class="col"> -->
+            <div ngbDropdown placement="left-left">
+              <button class="btn btnvert float-right btn-sm" id="smenu" ngbDropdownToggle>
+                <fa-icon icon="list"></fa-icon>
+              </button>
+              <div ngbDropdownMenu="smenu">
+                <button
+                  ngbDropdownItem
+                  type="submit"
+                  [routerLink]="['/sanction', sanction.id, 'view']"
+                  class="btn btn-info btn-sm"
+                  data-cy="entityDetailsButton"
+                >
+                  <fa-icon icon="eye"></fa-icon>
+                  <span class="d-none d-md-inline">Afficher</span>
+                </button>
+
+                <button
+                  ngbDropdownItem
+                  type="submit"
+                  [routerLink]="['/sanction', sanction.id, 'edit']"
+                  class="btn btn-primary btn-sm"
+                  data-cy="entityEditButton"
+                >
+                  <fa-icon icon="pencil-alt"></fa-icon>
+                  <span class="d-none d-md-inline">Modifier</span>
+                </button>
+
+                <button ngbDropdownItem type="submit" (click)="delete(sanction)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <fa-icon icon="times"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                </button>
+              </div>
+            </div>
+          </td>
+          <!-- <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/sanctionner']"
+                [queryParams]="{ 'filter[sanctionId.in]': sanction.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">Translation missing for entity.action.show</span>
+              </button>
+              <a [routerLink]="['/sanction', sanction.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">Translation missing for entity.action.view</span>
+              </a>
+
+              <a [routerLink]="['/sanction', sanction.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Translation missing for entity.action.edit</span>
+              </a>
+
+              <button type="submit" (click)="delete(sanction)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Translation missing for entity.action.delete</span>
+              </button>
+            </div>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="sanctions && sanctions.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

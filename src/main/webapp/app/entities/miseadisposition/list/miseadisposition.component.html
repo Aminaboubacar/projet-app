@@ -1,0 +1,216 @@
+<div>
+  <h2 id="page-heading" data-cy="MiseadispositionHeading">
+    <span
+      style="
+        font-family: 'Times New Roman', Times, serif;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 5px;
+        font-size: 80px;
+        text-decoration: underline;
+        max-height: 0px;
+      "
+      >Miseadispositions</span
+    >
+    <img
+      src="content/images/logo-cnss.png"
+      alt="Description de l'image"
+      alt="CNSS"
+      style="max-width: 10%; height: auto; align-items: center; display: block; margin-top: auto; margin-bottom: auto"
+    />
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-miseadisposition"
+        [routerLink]="['/miseadisposition/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Créer un nouveau Miseadisposition</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="miseadispositions?.length === 0">
+    <span>Aucun Miseadisposition trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="miseadispositions && miseadispositions.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id" hiSortBy="id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">#</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="code" hiSortBy="id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="appApp.miseadisposition.code">Code</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="organisme" hiSortBy="id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="appApp.miseadisposition.organisme">Organisme</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateDebut" hiSortBy="id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="appApp.miseadisposition.dateDebut">Date Debut</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateFin" hiSortBy="id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="appApp.miseadisposition.dateFin">Date Fin</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sensMouvement" hiSortBy="id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="appApp.miseadisposition.sensMouvement">Sens Mouvement</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateRetour" hiSortBy="id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="appApp.miseadisposition.dateRetour">Date Retour</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="agent.matricule" hiSortBy="id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span>Agent</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="miseadisposition.id" hiSortBy="id" style="background-color: rgb(127, 204, 255)">
+            <div class="d-flex">
+              <span jhiTranslate="appApp.miseadisposition.code">Action</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let miseadisposition of miseadispositions; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/miseadisposition', miseadisposition.id, 'view']">{{ miseadisposition.id }}</a>
+          </td>
+          <td>{{ miseadisposition.code }}</td>
+          <td>{{ miseadisposition.organisme }}</td>
+          <td>{{ miseadisposition.dateDebut | formatMediumDate }}</td>
+          <td>{{ miseadisposition.dateFin | formatMediumDate }}</td>
+          <td>{{ miseadisposition.sensMouvement }}</td>
+          <td>{{ miseadisposition.dateRetour | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="miseadisposition.agent">
+              <a [routerLink]="['/agent', miseadisposition.agent.id, 'view']">{{ miseadisposition.agent.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <!-- <div class="col"> -->
+            <div ngbDropdown placement="left-left">
+              <button class="btn btnvert float-right btn-sm" id="smenu" ngbDropdownToggle>
+                <fa-icon icon="list"></fa-icon>
+              </button>
+              <div ngbDropdownMenu="smenu">
+                <button
+                  ngbDropdownItem
+                  type="submit"
+                  [routerLink]="['/miseadisposition', miseadisposition.id, 'view']"
+                  class="btn btn-info btn-sm"
+                  data-cy="entityDetailsButton"
+                >
+                  <fa-icon icon="eye"></fa-icon>
+                  <span class="d-none d-md-inline">Afficher</span>
+                </button>
+
+                <button
+                  ngbDropdownItem
+                  type="submit"
+                  [routerLink]="['/miseadisposition', miseadisposition.id, 'edit']"
+                  class="btn btn-primary btn-sm"
+                  data-cy="entityEditButton"
+                >
+                  <fa-icon icon="pencil-alt"></fa-icon>
+                  <span class="d-none d-md-inline">Modifier</span>
+                </button>
+
+                <button
+                  ngbDropdownItem
+                  type="submit"
+                  (click)="delete(miseadisposition)"
+                  class="btn btn-danger btn-sm"
+                  data-cy="entityDeleteButton"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                </button>
+              </div>
+            </div>
+          </td>
+          <!-- <td class="text-end">
+            <div class="btn-group">
+              <a
+                [routerLink]="['/miseadisposition', miseadisposition.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">Translation missing for entity.action.view</span>
+              </a>
+
+              <a
+                [routerLink]="['/miseadisposition', miseadisposition.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Translation missing for entity.action.edit</span>
+              </a>
+
+              <button type="submit" (click)="delete(miseadisposition)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Translation missing for entity.action.delete</span>
+              </button>
+            </div>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="miseadispositions && miseadispositions.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

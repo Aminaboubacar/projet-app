@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20240320122449",
+  "entityTableName": "disponibilite",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "Date"
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "Date"
+    },
+    {
+      "fieldName": "dateRetour",
+      "fieldType": "Date"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Disponibilite",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "motifDisponibilite",
+      "otherEntityRelationshipName": "disponibilite",
+      "relationshipName": "motifDisponibilite",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "agent",
+      "otherEntityRelationshipName": "disponibilite",
+      "relationshipName": "agent",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

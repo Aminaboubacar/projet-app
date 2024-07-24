@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20240320122249",
+  "entityTableName": "miseadisposition",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "organisme",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "Date"
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "Date"
+    },
+    {
+      "fieldName": "sensMouvement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateRetour",
+      "fieldType": "Date"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Miseadisposition",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "agent",
+      "otherEntityRelationshipName": "miseadisposition",
+      "relationshipName": "agent",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

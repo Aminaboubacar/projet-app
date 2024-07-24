@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Sanctionner.
+    -->
+    <changeSet id="20240320122549-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="sanction_id"
+                                 baseTableName="sanctionner"
+                                 constraintName="fk_sanctionner__sanction_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sanction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="demande_dexplication_id"
+                                 baseTableName="sanctionner"
+                                 constraintName="fk_sanctionner__demande_dexplication_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="demande_dexplication"
+                                 />
+    </changeSet>
+</databaseChangeLog>

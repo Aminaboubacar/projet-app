@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20240320122349",
+  "entityTableName": "motif_disponibilite",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "MotifDisponibilite",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "disponibilite",
+      "otherEntityRelationshipName": "motifDisponibilite",
+      "relationshipName": "disponibilite",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20240320122549",
+  "entityTableName": "sanctionner",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Sanctionner",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "sanction",
+      "otherEntityRelationshipName": "sanctionner",
+      "relationshipName": "sanction",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "demandeDexplication",
+      "otherEntityRelationshipName": "sanctionner",
+      "relationshipName": "demandeDexplication",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

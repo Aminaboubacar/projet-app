@@ -1,0 +1,105 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-sanctionner-heading"
+        data-cy="SanctionnerCreateUpdateHeading"
+        style="font-family: 'Times New Roman', Times, serif; display: flex; font-size: 40px"
+      >
+        Créer ou éditer un Sanctionner
+      </h2>
+
+      <div style="background-color: #f9f9f9; margin-bottom: 10px">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id" style="font-family: Arial, Helvetica, sans-serif">#</label>
+          <input
+            type="number"
+            class="form-control"
+            name="id"
+            id="field_id"
+            data-cy="id"
+            formControlName="id"
+            [readonly]="true"
+            style="border: 3px solid #ccc"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_date" style="font-family: Arial, Helvetica, sans-serif">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="date"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD"
+              style="border: 3px solid #ccc"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sanction" style="font-family: Arial, Helvetica, sans-serif">Sanction</label>
+          <select
+            class="form-control"
+            id="field_sanction"
+            data-cy="sanction"
+            name="sanction"
+            formControlName="sanction"
+            [compareWith]="compareSanction"
+            style="border: 3px solid #ccc"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="sanctionOption" *ngFor="let sanctionOption of sanctionsSharedCollection">{{ sanctionOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_demandeDexplication" style="font-family: Arial, Helvetica, sans-serif"
+            >Demande Dexplication</label
+          >
+          <select
+            class="form-control"
+            id="field_demandeDexplication"
+            data-cy="demandeDexplication"
+            name="demandeDexplication"
+            formControlName="demandeDexplication"
+            [compareWith]="compareDemandeDexplication"
+            style="border: 3px solid #ccc"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="demandeDexplicationOption" *ngFor="let demandeDexplicationOption of demandeDexplicationsSharedCollection">
+              {{ demandeDexplicationOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            style="font-family: Arial, Helvetica, sans-serif; background-color: #000103; color: #fff"
+            >Annuler</span
+          >
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            style="font-family: Arial, Helvetica, sans-serif; background-color: #000103; color: #fff"
+            >Enregistrer</span
+          >
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
